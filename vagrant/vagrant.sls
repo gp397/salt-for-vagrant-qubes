@@ -15,7 +15,7 @@ vagrant-prefs:
       - include-in-backups: false
       - netvm: sys-firewall
       - template_for_dispvms: false
-      - provides_network: true
+      - provides-network: true
     - features:
       - disable:
         - appmenus-dispvm
