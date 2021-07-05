@@ -1,0 +1,7 @@
+# -*- coding: utf-8 -*-
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et :
+
+# Template Informaiton
+fedora_template:
+  fedora_version: 33
+  template_name: fedora-33

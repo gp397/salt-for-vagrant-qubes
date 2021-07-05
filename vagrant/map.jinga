@@ -1,0 +1,11 @@
+# -*- coding: utf-8 -*-
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et :
+
+{% import_yaml 'vagrant/defaults.yaml' as default_settings %}
+
+{% set fedora_template = salt['pillar.get'](
+    'fedora_template',
+    default=default_settings.fedora_template,
+    merge=True
+  )
+%}
