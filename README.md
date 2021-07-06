@@ -20,7 +20,14 @@ VM_TARGET=lab
 DIR_TARGET=/home/user/vagrant_qubes/salt-for-vagrant-qubes
 ```
 
-This will copy the code you have just pulled from github to dom0.
+Copy this script into root's homedir in dom0 and make it executable.
+
+```
+# qvm-run --pass-io <VM containing the formula> 'cat <folder containing the formula>/copy-from-vm-to-dom0.sh' > copy-from-vm-to-dom0.sh
+# chmod 755 copy-from-vm-to-dom0.sh
+```
+
+This will enable you to easily copy the code you have just pulled from github to dom0 into /srv/salt and enable the top file.
 
 Then in dom0, as root
 
