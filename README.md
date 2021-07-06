@@ -15,18 +15,18 @@ Read the code first, this needs to be in your dom0, if you don't understand it o
 
 Edit copy-from-vm-to-dom0.sh and update the following config
 
-'''
+```
 VM_TARGET=lab
 DIR_TARGET=/home/user/vagrant_qubes/salt-for-vagrant-qubes
-'''
+```
 
 This will copy the code you have just pulled from github to dom0.
 
 Then in dom0, as root
 
-'''
+```
 qubesctl --all state.highstate
-'''
+```
 
 This will:
 - Create a template based on fedora-33 (you can change that in the code)
