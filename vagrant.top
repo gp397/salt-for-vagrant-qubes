@@ -8,5 +8,7 @@ base:
   'vagrant-template':
     - vagrant.vagrant-pkg
     - vagrant.vscode-pkg
+  'vagrant-guest-template':
+    - vagrant.vagrant-guest-config
   'vagrant':
     - vagrant.vagrant-plugins

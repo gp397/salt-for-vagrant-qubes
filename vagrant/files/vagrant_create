@@ -1,0 +1,5 @@
+#!/bin/bash
+
+read class label template vcpus memory netvm
+
+/usr/bin/qvm-create --class ${class} --label ${label} --template ${template} --property vcpus=${vcpus} --property memory=${memory} --property netvm=${netvm} $1

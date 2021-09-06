@@ -4,6 +4,7 @@
 include:
   - qvm.sys-firewall
   - vagrant.vagrant-template
+  - vagrant.vagrant-guest-template
 
 vagrant-prefs:
   qvm.vm:
@@ -22,6 +23,7 @@ vagrant-prefs:
     - require:
       - qvm: sys-firewall
       - sls: vagrant.vagrant-template
+      - sls: vagrant.vagrant-guest-template
     - tags:
       - add:
         - vagrant
@@ -29,12 +31,7 @@ vagrant-prefs:
 vagrant_create:
   file.managed:
     - name: '/etc/qubes-rpc/vagrant_create'
-    - contents: |
-        #!/bin/bash
-        
-        read class label template vcpus memory netvm
-        
-        /usr/bin/qvm-create --class ${class} --label ${label} --template ${template} --property vcpus=${vcpus} --property memory=${memory} --property netvm=${netvm} $1
+    - source: salt://vagrant/files/vagrant_create
     - user: root
     - group: root
     - mode: 755
@@ -52,10 +49,7 @@ vagrant_create_policy:
 vagrant_destroy:
   file.managed:
     - name: '/etc/qubes-rpc/vagrant_destroy'
-    - contents: |
-        #!/bin/bash
-        
-        /usr/bin/qvm-remove -f $1
+    - source: salt://vagrant/files/vagrant_destroy
     - user: root
     - group: root
     - mode: 755
@@ -73,10 +67,7 @@ vagrant_destroy_policy:
 vagrant_list:
   file.managed:
     - name: '/etc/qubes-rpc/vagrant_list'
-    - contents: |
-        #!/bin/bash
-        
-        /usr/bin/qvm-ls --raw-data --fields=name,state,netvm,ip,class,template $1
+    - source: salt://vagrant/files/vagrant_list
     - user: root
     - group: root
     - mode: 755
@@ -94,10 +85,7 @@ vagrant_list_policy:
 vagrant_start:
   file.managed:
     - name: '/etc/qubes-rpc/vagrant_start'
-    - contents: |
-        #!/bin/bash
-        
-        /usr/bin/qvm-start $1
+    - source: salt://vagrant/files/vagrant_start
     - user: root
     - group: root
     - mode: 755
@@ -115,10 +103,7 @@ vagrant_start_policy:
 vagrant_stop:
   file.managed:
     - name: '/etc/qubes-rpc/vagrant_stop'
-    - contents: |
-        #!/bin/bash
-        
-        /usr/bin/qvm-shutdown $1
+    - source: salt://vagrant/files/vagrant_stop
     - user: root
     - group: root
     - mode: 755
@@ -126,6 +111,24 @@ vagrant_stop:
 vagrant_stop_policy:
   file.managed:
     - name: '/etc/qubes-rpc/policy/vagrant_stop'
+    - contents: |
+        @tag:vagrant dom0 allow
+        @anyvm @anyvm deny
+    - user: root
+    - group: root
+    - mode: 644
+
+vagrant_openfw:
+  file.managed:
+    - name: '/etc/qubes-rpc/vagrant_openfw'
+    - source: salt://vagrant/files/vagrant_openfw
+    - user: root
+    - group: root
+    - mode: 755
+
+vagrant_openfw_policy:
+  file.managed:
+    - name: '/etc/qubes-rpc/policy/vagrant_openfw'
     - contents: |
         @tag:vagrant dom0 allow
         @anyvm @anyvm deny
