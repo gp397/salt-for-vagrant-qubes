@@ -1,3 +1,5 @@
 #!/bin/bash
 
-/usr/bin/qvm-run --pass-io $1 "sudo iptables -I INPUT -s $2 -j ACCEPT"
+read ipaddress
+
+/usr/bin/qvm-run --pass-io $1 "sudo iptables -I INPUT -s ${ipaddress} -j ACCEPT"
