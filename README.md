@@ -47,8 +47,6 @@ This will:
 There is a lot to do, in no particular order:
 - Add sanity checking, input validation etc. to the Qubes-RPC scripts
 - Actually think about security properly
-- Sort out networking on Vagrant's children so that provision can work
-- Sort out networking (possibly by an option) so that Vagrant's children can talk to each other
 
 ## Contributing
 
