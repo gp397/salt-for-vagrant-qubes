@@ -37,10 +37,11 @@ qubesctl --all state.highstate
 
 This will:
 - Create a template based on fedora-33 (you can change that in the code)
-- Install vagrant and VSCode into it
+- Install vagrant, VSCode into it and a script to enable networking between guests
 - Create a ProxyVM "vagrant"
 - Install my vagrant-qubes plugin into it
 - Setup Qubes-RPC, with a tag based policy to enable the vagrant-qubes to call functions in dom0
+- Create another template (for guests) based on fedora-33 and install openssh server and puppet into it
 
 ## TODO
 
