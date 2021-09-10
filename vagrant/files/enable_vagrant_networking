@@ -1,0 +1,27 @@
+#!/bin/bash
+
+IFS=$'\n'
+for entry in $(/usr/bin/vagrant address)
+do
+  vm=$(echo $entry | /usr/bin/awk '{print $2}' | /usr/bin/sed 's/://g')
+  ip=$(echo $entry | /usr/bin/awk '{print $3}')
+  identfile=$(/usr/bin/vagrant ssh-config ${vm} | /usr/bin/grep IdentityFile | awk '{print $2}')
+  for entry2 in $(/usr/bin/vagrant address)
+  do
+    vm2=$(echo $entry2 | /usr/bin/awk '{print $2}' | /usr/bin/sed 's/://g')
+    ip2=$(echo $entry2 | /usr/bin/awk '{print $3}')
+    if [ ${ip2} == ${ip} ]
+    then
+      continue
+    fi
+    echo "${vm} : ${vm2}"
+    echo "net: sudo iptables -C FORWARD -s ${ip} -d ${ip2} -j ACCEPT || sudo iptables -I FORWARD 2 -s ${ip} -d ${ip2} -j ACCEPT"
+    echo "${vm}: sudo iptables -C INPUT -s ${ip2} -j ACCEPT || sudo iptables -I INPUT 2 -s ${ip2} -j ACCEPT"
+    echo "${vm}: sudo puppet resource host ${vm2} ensure=present ip=${ip2}"
+    iptcommand="sudo iptables -C INPUT -s ${ip2} -j ACCEPT || sudo iptables -I INPUT 2 -s ${ip2} -j ACCEPT"
+    pptcommand="sudo puppet resource host ${vm2} ensure=present ip=${ip2}"
+    /usr/bin/ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null vagrant@${ip} -i ${identfile} -C ${iptcommand}
+    /usr/bin/ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null vagrant@${ip} -i ${identfile} -C ${pptcommand}
+    sudo iptables -C FORWARD -s ${ip} -d ${ip2} -j ACCEPT || sudo iptables -I FORWARD 2 -s ${ip} -d ${ip2} -j ACCEPT
+  done
+done
