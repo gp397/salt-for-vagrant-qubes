@@ -5,6 +5,7 @@ vagrant_guest_pkgs:
   pkg.installed:
     - pkgs:
       - openssh-server
+      - puppet
 
 sshd_service:
   service.enabled:
