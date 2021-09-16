@@ -3,14 +3,14 @@
 
 {% from 'vagrant/map.jinga' import fedora_template with context %}
 
-vagrant-guest-template:
+vagrant-guest-fedora:
   qvm.clone:
-    - name: vagrant-guest-template
+    - name: vagrant-guest-fedora
     - source: {{ fedora_template.template_name }}
     - label: black
 
-vagrant-guest-template-prefs:
+vagrant-guest-fedora-prefs:
   qvm.vm:
-    - name: vagrant-guest-template
+    - name: vagrant-guest-fedora
     - prefs:
       - include-in-backups: false

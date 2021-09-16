@@ -9,7 +9,9 @@ base:
     - vagrant.vagrant-pkg
     - vagrant.vscode-pkg
     - vagrant.vagrant-tools
-  'vagrant-guest-template':
+  'vagrant-guest-fedora':
+    - vagrant.vagrant-guest-config
+  'vagrant-guest-centos':
     - vagrant.vagrant-guest-config
   'vagrant':
     - vagrant.vagrant-plugins

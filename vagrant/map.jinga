@@ -9,3 +9,10 @@
     merge=True
   )
 %}
+
+{% set centos_template = salt['pillar.get'](
+    'centos_template',
+    default=default_settings.centos_template,
+    merge=True
+  )
+%}

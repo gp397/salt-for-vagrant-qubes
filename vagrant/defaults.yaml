@@ -5,3 +5,7 @@
 fedora_template:
   fedora_version: 33
   template_name: fedora-33
+
+centos_template:
+  centos_version: 7
+  template_name: centos-7
