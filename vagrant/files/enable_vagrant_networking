@@ -19,7 +19,7 @@ do
     echo "${vm}: sudo iptables -C INPUT -s ${ip2} -j ACCEPT || sudo iptables -I INPUT 2 -s ${ip2} -j ACCEPT"
     echo "${vm}: sudo puppet resource host ${vm2} ensure=present ip=${ip2}"
     iptcommand="sudo iptables -C INPUT -s ${ip2} -j ACCEPT || sudo iptables -I INPUT 2 -s ${ip2} -j ACCEPT"
-    pptcommand="sudo puppet resource host ${vm2} ensure=present ip=${ip2}"
+    pptcommand="sudo -i puppet resource host ${vm2} ensure=present ip=${ip2}"
     /usr/bin/ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null vagrant@${ip} -i ${identfile} -C ${iptcommand}
     /usr/bin/ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null vagrant@${ip} -i ${identfile} -C ${pptcommand}
     sudo iptables -C FORWARD -s ${ip} -d ${ip2} -j ACCEPT || sudo iptables -I FORWARD 2 -s ${ip} -d ${ip2} -j ACCEPT
