@@ -3,8 +3,8 @@
 
 # Template Informaiton
 fedora_template:
-  fedora_version: 33
-  template_name: fedora-33
+  fedora_version: 34
+  template_name: fedora-34
 
 centos_template:
   centos_version: 7
