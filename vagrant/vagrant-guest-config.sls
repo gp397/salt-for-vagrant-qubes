@@ -19,13 +19,20 @@ lsb_pkg:
       - redhat-lsb-core
 
 # puppet - needed for networking script
-# centos need to add repo, fedora 33 has a version of puppet but puppetlabs don't so don't add repo
 {% if grains['os']|lower == 'centos' %}
 puppet_repo:
   pkg.installed:
     - sources:
       - puppet6-release: https://yum.puppet.com/puppet6-release-el-{{ grains['osmajorrelease']}}.noarch.rpm
 {% endif %}
+
+#{% set pe_supported_fedora=[34] %}
+#{% if (grains['os']|lower == 'fedora') and (grains['osmajorrelease'] in pe_supported_fedora) %}
+#puppet_repo:
+#  pkg.installed:
+#    - sources:
+#      - puppet6-release: https://yum.puppet.com/puppet6-release-fedora-{{ grains['osmajorrelease']}}.noarch.rpm
+#{% endif %}
 
 puppet_pkg:
   pkg.installed:
