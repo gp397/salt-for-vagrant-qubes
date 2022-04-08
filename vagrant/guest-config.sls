@@ -1,22 +1,34 @@
 # -*- coding: utf-8 -*-
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
+{% set apvar = salt['grains.filter_by'] ( {
+  'Fedora': {
+    'lsbpkg': 'redhat-lsb-core',
+    'sshpkg': 'openssh-server',
+    'sshsvc': 'sshd',
+  },
+  'Ubuntu': {
+    'lsbpkg': 'lsb-core',
+    'sshpkg': 'openssh-server',
+    'sshsvc': 'sshd',
+  },
+}, grain='os', default = 'Fedora') %}
+
+# LSB
+lsb_pkg:
+  pkg.installed:
+    - pkgs:
+      - {{ apvar.lsbpkg }}
+
 # sshd
 sshd_pkg:
   pkg.installed:
     - pkgs:
-      - openssh-server
+      - {{ apvar.sshpkg }}
 
 sshd_service:
   service.enabled:
-    - name: sshd
-
-# LSB
-# Needed for various scripts in my lab
-lsb_pkg:
-  pkg.installed:
-    - pkgs:
-      - redhat-lsb-core
+    - name: {{ apvar.sshsvc }}
 
 # puppet - needed for networking script
 {% if grains['os']|lower == 'centos' %}
@@ -25,14 +37,6 @@ puppet_repo:
     - sources:
       - puppet6-release: https://yum.puppet.com/puppet6-release-el-{{ grains['osmajorrelease']}}.noarch.rpm
 {% endif %}
-
-#{% set pe_supported_fedora=[34] %}
-#{% if (grains['os']|lower == 'fedora') and (grains['osmajorrelease'] in pe_supported_fedora) %}
-#puppet_repo:
-#  pkg.installed:
-#    - sources:
-#      - puppet6-release: https://yum.puppet.com/puppet6-release-fedora-{{ grains['osmajorrelease']}}.noarch.rpm
-#{% endif %}
 
 puppet_pkg:
   pkg.installed:

@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
-{% from 'vagrant/map.jinga' import fedora_template with context %}
-
 vagrant-template:
   qvm.clone:
     - name: vagrant-template
-    - source: {{ fedora_template.template_name }}
+    - source: fedora-34
     - label: black
 
 vagrant-template-prefs:

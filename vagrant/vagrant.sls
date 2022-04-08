@@ -4,8 +4,7 @@
 include:
   - qvm.sys-firewall
   - vagrant.vagrant-template
-  - vagrant.vagrant-guest-fedora
-#   - vagrant.vagrant-guest-centos
+  - vagrant.vagrant-guests
 
 vagrant-prefs:
   qvm.vm:
@@ -24,8 +23,7 @@ vagrant-prefs:
     - require:
       - qvm: sys-firewall
       - sls: vagrant.vagrant-template
-      - sls: vagrant.vagrant-guest-fedora
-#       - sls: vagrant.vagrant-guest-centos
+      - sls: vagrant.vagrant-guests
     - tags:
       - add:
         - vagrant

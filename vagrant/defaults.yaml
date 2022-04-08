@@ -2,10 +2,6 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
 # Template Informaiton
-fedora_template:
-  fedora_version: 34
-  template_name: fedora-34
-
-centos_template:
-  centos_version: 7
-  template_name: centos-7
+template_list:
+  - fedora-34
+  - focal
