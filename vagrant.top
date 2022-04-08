@@ -11,7 +11,7 @@ base:
     - vagrant.vagrant-tools
   'vagrant-guest-fedora':
     - vagrant.vagrant-guest-config
-  'vagrant-guest-centos':
-    - vagrant.vagrant-guest-config
+  # 'vagrant-guest-centos':
+  #   - vagrant.vagrant-guest-config
   'vagrant':
     - vagrant.vagrant-plugins
