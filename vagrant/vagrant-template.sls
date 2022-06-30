@@ -4,7 +4,7 @@
 vagrant-template:
   qvm.clone:
     - name: vagrant-template
-    - source: fedora-34
+    - source: fedora-36
     - label: black
 
 vagrant-template-prefs:
