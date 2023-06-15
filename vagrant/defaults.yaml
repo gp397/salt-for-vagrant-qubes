@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
-# Template Information
-template_list:
+fedora_template:
+  fedora_version: 38
+  template_name: fedora-38
+
+guest_template_list:
   - fedora-38
   - jammy

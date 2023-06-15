@@ -3,9 +3,16 @@
 
 {% import_yaml 'vagrant/defaults.yaml' as default_settings %}
 
-{% set template_list = salt['pillar.get'](
-    'template_list',
-    default=default_settings.template_list,
+{% set fedora_template = salt['pillar.get'](
+    'fedora_template',
+    default=default_settings.fedora_template,
+    merge=True
+  )
+%}
+
+{% set guest_template_list = salt['pillar.get'](
+    'guest_template_list',
+    default=default_settings.guest_template_list,
     merge=True
   )
 %}

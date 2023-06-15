@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
-{% from 'vagrant/map.jinga' import template_list with context %}
+{% from 'vagrant/map.jinga' import guest_template_list with context %}
 
-{% for template in template_list %}
+{% for template in guest_template_list %}
 vagrant-guest-{{template}}:
   qvm.clone:
     - name: vagrant-guest-{{template}}

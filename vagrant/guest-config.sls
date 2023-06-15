@@ -30,19 +30,6 @@ sshd_service:
   service.enabled:
     - name: {{ apvar.sshsvc }}
 
-# puppet - needed for networking script
-{% if grains['os']|lower == 'centos' %}
-puppet_repo:
-  pkg.installed:
-    - sources:
-      - puppet6-release: https://yum.puppet.com/puppet6-release-el-{{ grains['osmajorrelease']}}.noarch.rpm
-{% endif %}
-
-puppet_pkg:
-  pkg.installed:
-    - pkgs:
-      - puppet
-
 # Vagrant User, shh key etc.
 vagrant_user:
   user.present:

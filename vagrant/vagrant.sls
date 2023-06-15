@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
+{% from 'flibsquoo/map.jinga' import fedora_template with context %}
+
 include:
   - qvm.sys-firewall
   - vagrant.vagrant-template
@@ -10,13 +12,14 @@ vagrant-prefs:
   qvm.vm:
     - name: vagrant
     - present:
-      - template: vagrant-template
+      - template: vagrant-{{ fedora_template.fedora_version }}-template
       - label: purple
     - prefs:
       - include-in-backups: false
       - netvm: sys-firewall
       - template_for_dispvms: false
       - provides-network: true
+      - template: vagrant-{{ fedora_template.fedora_version }}-template
     - features:
       - disable:
         - appmenus-dispvm
