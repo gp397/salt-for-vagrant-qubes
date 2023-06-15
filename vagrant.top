@@ -7,7 +7,7 @@
 base:
   'dom0':
     - vagrant.vagrant
-  'vagrant-template':
+  'vagrant-{{ fedora_template.fedora_version }}-template':
     - vagrant.vagrant-pkgs
   'vagrant':
     - vagrant.vagrant-plugins
