@@ -10,6 +10,12 @@ vagrant_pkgs:
       - ncurses-compat-libs
       - vagrant
 
+ansible_pkgs:
+  pkg.installed:
+    - pkgs:
+      - python3-netaddr
+      - ansible
+
 # VScode
 vscode_repo:
   pkgrepo.managed:

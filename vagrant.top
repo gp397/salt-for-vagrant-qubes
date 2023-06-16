@@ -8,7 +8,7 @@ base:
   'dom0':
     - vagrant.vagrant
   'vagrant-{{ fedora_template.fedora_version }}-template':
-    - vagrant.vagrant-pkgs
+    - vagrant.packages
   'vagrant':
     - vagrant.vagrant-plugins
 {% for template in guest_template_list %}
