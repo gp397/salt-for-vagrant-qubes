@@ -15,4 +15,5 @@ vagrant-guest-{{template}}-prefs:
     - name: vagrant-guest-{{template}}
     - prefs:
       - include-in-backups: false
+      - kernelopts: swiotlb=2048 cgroup_enable=memory swapaccount=1 systemd.unified_cgroup_hierarchy=0
 {% endfor %}
