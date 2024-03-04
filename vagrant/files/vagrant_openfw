@@ -2,4 +2,4 @@
 
 read ipaddress
 
-/usr/bin/qvm-run --pass-io $1 "sudo iptables -I INPUT -s ${ipaddress} -j ACCEPT"
+/usr/bin/qvm-run --pass-io $1 "sudo nft add rule qubes custom-input ip saddr ${ipaddress} ct state new,established,related counter accept || sudo iptables -I INPUT -s ${ipaddress} -j ACCEPT"
