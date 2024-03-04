@@ -25,3 +25,5 @@ do
     sudo iptables -C FORWARD -s ${ip} -d ${ip2} -j ACCEPT || sudo iptables -I FORWARD 2 -s ${ip} -d ${ip2} -j ACCEPT
   done
 done
+
+# nft add rule qubes custom-input tcp dport 22 ip saddr 10.137.0.32 ct state new,established,related counter accept
