@@ -39,16 +39,6 @@ vagrant_create:
     - group: root
     - mode: 755
 
-vagrant_create_policy:
-  file.managed:
-    - name: '/etc/qubes-rpc/policy/vagrant_create'
-    - contents: |
-        @tag:vagrant dom0 allow
-        @anyvm @anyvm deny
-    - user: root
-    - group: root
-    - mode: 644
-
 vagrant_destroy:
   file.managed:
     - name: '/etc/qubes-rpc/vagrant_destroy'
@@ -56,16 +46,6 @@ vagrant_destroy:
     - user: root
     - group: root
     - mode: 755
-
-vagrant_destroy_policy:
-  file.managed:
-    - name: '/etc/qubes-rpc/policy/vagrant_destroy'
-    - contents: |
-        @tag:vagrant dom0 allow
-        @anyvm @anyvm deny
-    - user: root
-    - group: root
-    - mode: 644
 
 vagrant_list:
   file.managed:
@@ -75,16 +55,6 @@ vagrant_list:
     - group: root
     - mode: 755
 
-vagrant_list_policy:
-  file.managed:
-    - name: '/etc/qubes-rpc/policy/vagrant_list'
-    - contents: |
-        @tag:vagrant dom0 allow
-        @anyvm @anyvm deny
-    - user: root
-    - group: root
-    - mode: 644
-
 vagrant_start:
   file.managed:
     - name: '/etc/qubes-rpc/vagrant_start'
@@ -92,16 +62,6 @@ vagrant_start:
     - user: root
     - group: root
     - mode: 755
-
-vagrant_start_policy:
-  file.managed:
-    - name: '/etc/qubes-rpc/policy/vagrant_start'
-    - contents: |
-        @tag:vagrant dom0 allow
-        @anyvm @anyvm deny
-    - user: root
-    - group: root
-    - mode: 644
 
 vagrant_stop:
   file.managed:
@@ -111,16 +71,6 @@ vagrant_stop:
     - group: root
     - mode: 755
 
-vagrant_stop_policy:
-  file.managed:
-    - name: '/etc/qubes-rpc/policy/vagrant_stop'
-    - contents: |
-        @tag:vagrant dom0 allow
-        @anyvm @anyvm deny
-    - user: root
-    - group: root
-    - mode: 644
-
 vagrant_openfw:
   file.managed:
     - name: '/etc/qubes-rpc/vagrant_openfw'
@@ -129,12 +79,16 @@ vagrant_openfw:
     - group: root
     - mode: 755
 
-vagrant_openfw_policy:
+vagrant_qubes_policy:
   file.managed:
-    - name: '/etc/qubes-rpc/policy/vagrant_openfw'
+    - name: '/etc/qubes/policy.d/30-vagrant-qubes.policy'
     - contents: |
-        @tag:vagrant dom0 allow
-        @anyvm @anyvm deny
+        vagrant_create	*	@tag:vagrant	@adminvm	allow
+        vagrant_destroy	*	@tag:vagrant	@adminvm	allow
+        vagrant_list	*	@tag:vagrant	@adminvm	allow
+        vagrant_start	*	@tag:vagrant	@adminvm	allow
+        vagrant_stop	*	@tag:vagrant	@adminvm	allow
+        vagrant_openfw	*	@tag:vagrant	@adminvm	allow
     - user: root
     - group: root
     - mode: 644
