@@ -25,6 +25,7 @@ sshd_pkg:
   pkg.installed:
     - pkgs:
       - {{ apvar.sshpkg }}
+      - puppet
 
 sshd_service:
   service.enabled:
