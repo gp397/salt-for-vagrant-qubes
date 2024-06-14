@@ -2,9 +2,9 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
 fedora_template:
-  fedora_version: 38
-  template_name: fedora-38
+  fedora_version: 40
+  template_name: fedora-40
 
 guest_template_list:
-  - fedora-38
+  - fedora-40
   - jammy
