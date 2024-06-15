@@ -13,6 +13,7 @@ vagrant_pkgs:
 ansible_pkgs:
   pkg.installed:
     - pkgs:
+      - python3-pip
       - python3-netaddr
       - ansible
 
